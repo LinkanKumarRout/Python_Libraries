@@ -95,3 +95,231 @@ Get third and fourth elements from the following array and add them:
 import numpy as np
 arr = np.array([1, 2, 3, 4])
 print(arr[2] + arr[3])
+
+Access 2-D Arrays
+-----------------
+To access elements from 2-D arrays we can use comma separated integers representing the dimension and the index of the element.
+Think of 2-D arrays like a table with rows and columns, where the dimension represents the row and the index represents the column.
+
+Access the element on the first row, second column:
+import numpy as np
+arr = np.array([[1,2,3,4,5], [6,7,8,9,10]])
+print('2nd element on 1st row: ', arr[0, 1])
+
+Access the element on the 2nd row, 5th column:
+import numpy as np
+arr = np.array([[1,2,3,4,5], [6,7,8,9,10]])
+print('5th element on 2nd row: ', arr[1, 4])
+
+Access 3-D Arrays
+-----------------
+To access elements from 3-D arrays we can use comma separated integers representing the dimensions and the index of the element.
+
+Access the third element of the second array of the first array:
+import numpy as np
+arr = np.array([[[1, 2, 3], [4, 5, 6]], [[7, 8, 9], [10, 11, 12]]])
+print(arr[0, 1, 2])
+
+Negative Indexing:
+Use negative indexing to access an array from the end.
+
+Print the last element from the 2nd dim:
+import numpy as np
+arr = np.array([[1,2,3,4,5], [6,7,8,9,10]])
+print('Last element from 2nd dim: ', arr[1, -1])
+
+Slicing arrays
+--------------
+Slicing in python means taking elements from one given index to another given index.
+
+We pass slice instead of index like this: [start:end].
+We can also define the step, like this: [start:end:step].
+If we don't pass start its considered 0
+If we don't pass end its considered length of array in that dimension
+If we don't pass step its considered 1
+
+Slice elements from index 1 to index 5 from the following array:
+import numpy as np
+arr = np.array([1, 2, 3, 4, 5, 6, 7])
+print(arr[1:5])
+
+Note: The result includes the start index, but excludes the end index.
+
+Negative Slicing:
+Use the minus operator to refer to an index from the end:
+
+Slice from the index 3 from the end to index 1 from the end:
+import numpy as np
+arr = np.array([1, 2, 3, 4, 5, 6, 7])
+print(arr[-3:-1])
+
+STEP
+----
+Use the step value to determine the step of the slicing:
+
+Return every other element from index 1 to index 5:
+import numpy as np
+arr = np.array([1, 2, 3, 4, 5, 6, 7])
+print(arr[1:5:2])
+
+Return every other element from the entire array:
+import numpy as np
+arr = np.array([1, 2, 3, 4, 5, 6, 7])
+print(arr[::2])
+
+Slicing 2-D Arrays
+------------------
+From the second element, slice elements from index 1 to index 4 (not included):
+import numpy as np
+arr = np.array([[1, 2, 3, 4, 5], [6, 7, 8, 9, 10]])
+print(arr[1, 1:4])
+
+From both elements, return index 2:
+import numpy as np
+arr = np.array([[1, 2, 3, 4, 5], [6, 7, 8, 9, 10]])
+print(arr[0:2, 2])
+
+From both elements, slice index 1 to index 4 (not included), this will return a 2-D array:
+import numpy as np
+arr = np.array([[1, 2, 3, 4, 5], [6, 7, 8, 9, 10]])
+print(arr[0:2, 1:4])
+
+Data Types in Python
+--------------------
+By default Python have these data types:
+
+strings - used to represent text data, the text is given under quote marks. e.g. "ABCD"
+integer - used to represent integer numbers. e.g. -1, -2, -3
+float - used to represent real numbers. e.g. 1.2, 42.42
+boolean - used to represent True or False.
+complex - used to represent complex numbers. e.g. 1.0 + 2.0j, 1.5 + 2.5j
+
+Data Types in NumPy
+-------------------
+NumPy has some extra data types, and refer to data types with one character, like i for integers, u for unsigned integers etc.
+
+Below is a list of all data types in NumPy and the characters used to represent them.
+
+i - integer
+b - boolean
+u - unsigned integer
+f - float
+c - complex float
+m - timedelta
+M - datetime
+O - object
+S - string
+U - unicode string
+V - fixed chunk of memory for other type ( void )
+
+Checking the Data Type of an Array
+----------------------------------
+The NumPy array object has a property called dtype that returns the data type of the array:
+
+Get the data type of an array object:
+import numpy as np
+arr = np.array([1, 2, 3, 4])
+print(arr.dtype)
+
+Get the data type of an array containing strings:
+import numpy as np
+arr = np.array(['apple', 'banana', 'cherry'])
+print(arr.dtype)
+
+Creating Arrays With a Defined Data Type
+----------------------------------------
+We use the array() function to create arrays, this function can take an optional argument: dtype that allows us to define the expected data type of the array elements:
+
+Create an array with data type string:
+import numpy as np
+arr = np.array([1, 2, 3, 4], dtype='S')
+print(arr)
+print(arr.dtype)
+
+For i, u, f, S and U we can define size as well.
+
+Create an array with data type 4 bytes integer:
+import numpy as np
+arr = np.array([1, 2, 3, 4], dtype='i4')
+print(arr)
+print(arr.dtype)
+
+What if a Value Can Not Be Converted?
+If a type is given in which elements can't be casted then NumPy will raise a ValueError.
+
+A non integer string like 'a' can not be converted to integer (will raise an error):
+import numpy as np
+arr = np.array(['a', '2', '3'], dtype='i')
+
+Converting Data Type on Existing Arrays
+---------------------------------------
+The best way to change the data type of an existing array, is to make a copy of the array with the astype() method.
+The astype() function creates a copy of the array, and allows you to specify the data type as a parameter.
+The data type can be specified using a string, like 'f' for float, 'i' for integer etc. or you can use the data type directly like float for float and int for integer.
+
+Change data type from float to integer by using 'i' as parameter value:
+import numpy as np
+arr = np.array([1.1, 2.1, 3.1])
+newarr = arr.astype('i')
+print(newarr)
+print(newarr.dtype)
+
+Change data type from float to integer by using int as parameter value:
+import numpy as np
+arr = np.array([1.1, 2.1, 3.1])
+newarr = arr.astype(int)
+print(newarr)
+print(newarr.dtype)
+
+Change data type from integer to boolean:
+import numpy as np
+arr = np.array([1, 0, 3])
+newarr = arr.astype(bool)
+print(newarr)
+print(newarr.dtype)
+
+The Difference Between Copy and View
+------------------------------------
+The main difference between a copy and a view of an array is that the copy is a new array, and the view is just a view of the original array.
+The copy owns the data and any changes made to the copy will not affect original array, and any changes made to the original array will not affect the copy.
+The view does not own the data and any changes made to the view will affect the original array, and any changes made to the original array will affect the view.
+
+COPY:
+Make a copy, change the original array, and display both arrays:
+
+import numpy as np
+arr = np.array([1, 2, 3, 4, 5])
+x = arr.copy()
+arr[0] = 42
+print(arr)
+print(x)
+
+The copy SHOULD NOT be affected by the changes made to the original array.
+
+VIEW:
+Make a view, change the original array, and display both arrays:
+
+import numpy as np
+arr = np.array([1, 2, 3, 4, 5])
+x = arr.view()
+arr[0] = 42
+print(arr)
+print(x)
+
+Check if Array Owns its Data
+----------------------------
+As mentioned above, copies owns the data, and views does not own the data, but how can we check this?
+Every NumPy array has the attribute base that returns None if the array owns the data.
+Otherwise, the base  attribute refers to the original object.
+
+Print the value of the base attribute to check if an array owns it's data or not:
+
+import numpy as np
+arr = np.array([1, 2, 3, 4, 5])
+x = arr.copy()
+y = arr.view()
+print(x.base)
+print(y.base)
+
+The copy returns None.
+The view returns the original array.
